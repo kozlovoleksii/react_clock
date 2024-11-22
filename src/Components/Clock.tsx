@@ -9,7 +9,9 @@ export class Clock extends React.Component<Props> {
   state: State = {
     today: new Date(),
   };
+
   timerId = 0;
+
   componentDidMount(): void {
     this.timerId = window.setInterval(() => {
       // eslint-disable-next-line no-console
@@ -17,15 +19,18 @@ export class Clock extends React.Component<Props> {
       this.setState({ today: new Date() });
     }, 1000);
   }
+
   componentDidUpdate(prevProps: Readonly<Props>): void {
     if (prevProps.name !== this.props.name) {
       // eslint-disable-next-line no-console
-      console.debug(`Renamed from ${prevProps.name} to ${this.props.name}`);
+      console.warn(`Renamed from ${prevProps.name} to ${this.props.name}`);
     }
   }
+
   componentWillUnmount(): void {
     clearInterval(this.timerId);
   }
+
   render() {
     return (
       <div className="Clock">
